@@ -2,13 +2,16 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Kata {
-    public static boolean isSquare(int n) {
-        var num = Math.sqrt(n);
-        if(Double.isNaN(num)) return false;
-        return (num-((int)num))==0;
+    public int max(int[] list) {
+        return Arrays.stream(list).max().getAsInt();
+    }
+
+    public int mim(int[] list) {
+        return Arrays.stream(list).min().getAsInt();
     }
     public static void main(String[] args) {
-        var n = Kata.isSquare(4);
-        n=false;
+        var kata = new Kata();
+        var min = kata.min(new int[]{-52, 56, 30, 29, -54, 0, -110});
+        kata = new Kata();
     }
 }
