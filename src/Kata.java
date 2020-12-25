@@ -1,18 +1,16 @@
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Kata {
-    public int max(int[] list) {
-        return Arrays.stream(list).max().getAsInt();
-    }
-
-    public int min(int[] list) {
-        return Arrays.stream(list).min().getAsInt();
+    public static int ConvertBinaryArrayToInt(List<Integer> binary) {
+        // Your Code
+        final int[] p = {binary.size() - 1};
+        return  binary.stream().map(s->s*Math.pow(2, p[0]--)).reduce(0.0,(acc,curr)->acc+curr).intValue();
     }
     public static void main(String[] args) {
-        var kata = new Kata();
-        var min = kata.min(new int[]{-52, 56, 30, 29, -54, 0, -110});
-        kata = new Kata();
+        System.out.println(ConvertBinaryArrayToInt(new ArrayList<>(Arrays.asList(1,0,0,1))));
     }
 
 
