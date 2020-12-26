@@ -7,17 +7,14 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Kata {
-    public boolean check(String sentence){
-        //code
-        return sentence.chars()
-                .filter(Character::isLetter)
-                .map(Character::toLowerCase)
-                .distinct()
-                .count() == 26;
+    public static int sortDesc(final int num) {
+        //Your code
+        Arrays.stream(Integer.toString(num)
+                .split(""))
+                .sorted()
     }
     public static void main(String[] args) {
-        var val = new Kata().check("The quick brown fox jumps over the lazy dog" );
-        val ="-abcdefghijklmnopqrstuvwxyz".equals("-abcdefghijklmnopqrstuvwxyz");
+
     }
 
 
