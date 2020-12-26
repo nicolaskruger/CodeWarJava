@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class Kata {
     public static boolean check(Object[] a, Object x) {
-        return Arrays.stream(a).filter(s->s.equals(x)).toArray().length>=1;
+        return Arrays.asList(a).contains(x);
     }
     public static void main(String[] args) {
 
