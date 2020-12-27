@@ -8,15 +8,29 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Kata {
-    public static String order(String words) {
-        return Arrays.stream(words.split(" "))
-                .sorted(Comparator.comparing(s -> Integer.valueOf(s.replaceAll("\\D", ""))))
-                .reduce((a, b) -> a + " " + b).get();
+    public static int[] race(int v1, int v2, int g) {
+        // your code
+        System.out.println(v1);
+        System.out.println(v2);
+        System.out.println(g);
+        if(v1>=v2) return  null;
+        double time = ((double)g/(v2-v1));
+        int hour = (int)time;
+        time = (time-hour)*60.0;
+        int min = (Math.round(time)-time)<0.001?(int)Math.round(time):(int)time;
+        int sec =(int)((time-min)*60);
+        int [] n = {
+                hour,
+                min,
+                sec
+        };
+        return n;
     }
 
 
     public static void main(String[] args) {
-        System.out.println(order("is2 Thi1s T4est 3a"));
+        race(820,850,550);
+
     }
 
 
