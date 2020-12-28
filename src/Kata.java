@@ -8,30 +8,24 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Kata {
-    public static long thirt(long n) {
-        // your code
-        long[] list ={
-                1,10,9,12,3,4
-        };
-        final int[] cont = {0};
-        long res =
-        Arrays.stream(Long.toString(n)
-                .split(""))
-                .sorted((a,b)->-1)
-                .map((curr)->{
-                    Long val=Long.valueOf(curr)*list[cont[0]];
-                    cont[0] =(cont[0] +1)%list.length;
-                    return val;
-                })
-                .reduce(Long.valueOf(0),(acc,curr)->acc+curr);
-        if(res==n)
-            return res;
-        return thirt(res);
+    public static int solveSuperMarketQueue(int[] customers, int n) {
+        int[] queue = new int[n];
+        for (int customer : customers) {
+            var minVal = Arrays.stream(queue).min().orElse(0);
+            final boolean[] find = {false};
+            var index = Arrays.stream(queue).reduce(0,(acc,curr)->{
+                if(curr==minVal) find[0] =true;
+                if(find[0]) return acc;
+                return acc+1;
+            });
+            queue[index]+=customer;
+        }
+        return Arrays.stream(queue).max().orElse(0);
     }
 
 
     public static void main(String[] args) {
-        thirt(1234567);
+        solveSuperMarketQueue(new int[] { 2, 2, 3, 3, 4, 4 }, 2);
     }
 
 
