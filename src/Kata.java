@@ -8,29 +8,30 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Kata {
-    public static int[] race(int v1, int v2, int g) {
+    public static long thirt(long n) {
         // your code
-        System.out.println(v1);
-        System.out.println(v2);
-        System.out.println(g);
-        if(v1>=v2) return  null;
-        double time = ((double)g/(v2-v1));
-        int hour = (int)time;
-        time = (time-hour)*60.0;
-        int min = (Math.round(time)-time)<0.001?(int)Math.round(time):(int)time;
-        int sec =(int)((time-min)*60);
-        int [] n = {
-                hour,
-                min,
-                sec
+        long[] list ={
+                1,10,9,12,3,4
         };
-        return n;
+        final int[] cont = {0};
+        long res =
+        Arrays.stream(Long.toString(n)
+                .split(""))
+                .sorted((a,b)->-1)
+                .map((curr)->{
+                    Long val=Long.valueOf(curr)*list[cont[0]];
+                    cont[0] =(cont[0] +1)%list.length;
+                    return val;
+                })
+                .reduce(Long.valueOf(0),(acc,curr)->acc+curr);
+        if(res==n)
+            return res;
+        return thirt(res);
     }
 
 
     public static void main(String[] args) {
-        race(820,850,550);
-
+        thirt(1234567);
     }
 
 
