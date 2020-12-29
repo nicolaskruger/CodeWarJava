@@ -8,24 +8,22 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Kata {
-    public static int solveSuperMarketQueue(int[] customers, int n) {
-        int[] queue = new int[n];
-        for (int customer : customers) {
-            var minVal = Arrays.stream(queue).min().orElse(0);
-            final boolean[] find = {false};
-            var index = Arrays.stream(queue).reduce(0,(acc,curr)->{
-                if(curr==minVal) find[0] =true;
-                if(find[0]) return acc;
-                return acc+1;
-            });
-            queue[index]+=customer;
-        }
-        return Arrays.stream(queue).max().orElse(0);
+    public static int[] twoSum(int[] numbers, int target)
+    {
+        for (int i =0 ;i<numbers.length;i++)
+            for (int j= i+1;j<numbers.length;j++){
+                int sum = numbers[i]+numbers[j];
+                if(sum==target)
+                    return new int[]{
+                      i,j
+                    };
+            }
+        return null; // Do your magic!
     }
 
 
     public static void main(String[] args) {
-        solveSuperMarketQueue(new int[] { 2, 2, 3, 3, 4, 4 }, 2);
+
     }
 
 
