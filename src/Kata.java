@@ -8,17 +8,18 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Kata {
-    public static int[] twoSum(int[] numbers, int target)
-    {
-        for (int i =0 ;i<numbers.length;i++)
-            for (int j= i+1;j<numbers.length;j++){
-                int sum = numbers[i]+numbers[j];
-                if(sum==target)
-                    return new int[]{
-                      i,j
-                    };
+    static String encode(String word){
+        word = word.toLowerCase(Locale.ROOT);
+        Map<String,Integer> map = new HashMap();
+        for (String s : word.split("")) {
+            if(!map.containsKey(s)){
+                map.put(s,0);
             }
-        return null; // Do your magic!
+            map.put(s,1+map.get(s));
+        }
+        return Arrays.stream(word.split(""))
+                .map(s->map.get(s)==1?"(":")")
+                .collect(Collectors.joining());
     }
 
 
