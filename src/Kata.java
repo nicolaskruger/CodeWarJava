@@ -1,6 +1,7 @@
 import com.sun.nio.sctp.AbstractNotificationHandler;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.function.IntFunction;
@@ -10,29 +11,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Kata {
-    public static String blackOrWhiteKey(int keyPressCount) {
-        // your code here
-        keyPressCount--;
-        List<Integer> piano = Arrays.asList(0,1,0);
-        for (int i =0;i<7;i++){
-            piano = Stream.concat(piano.stream(),Arrays.asList(0,1,0,1,0,0,1,0,1,0,1,0).stream())
-                    .collect(Collectors.toList());
+    public static String iterPi2String(Double epsilon) {
+        // your code
+        double pi =0;
+        int x = 0;
+        while (Math.abs(4*pi-Math.PI)>=epsilon){
+            pi+= Math.pow(-1,x)/(2*x+1);
+            x++;
         }
-        piano.add(0);
-        return piano.get(keyPressCount%piano.size())==0?"white":"black";
+        DecimalFormat num = new DecimalFormat("#.0000000000");
+        return "["+x+", "+num.format(4*pi)+"]";
     }
     public static void main(String[] args) {
-        var val = blackOrWhiteKey(1);
-        val = blackOrWhiteKey(5);
-        val = blackOrWhiteKey(12);
-        val = blackOrWhiteKey(42);
-        val = blackOrWhiteKey(88);
-        val = blackOrWhiteKey(89);
-        val = blackOrWhiteKey(92);
-        val = blackOrWhiteKey(100);
-        val = blackOrWhiteKey(111);
-        val = blackOrWhiteKey(200);
-        val = blackOrWhiteKey(2017);
+
     }
 
 
