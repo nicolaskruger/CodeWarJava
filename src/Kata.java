@@ -11,42 +11,29 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Kata {
-    public static boolean makeChange(Map<Integer,Integer> change,int price){
-        int troco= price - 25;
-        change.put(price,change.get(price)+1);
-        if(troco==0) return true;
-        if(troco == 25){
-            if (change.get(troco)>=1){
-                change.put(troco,change.get(troco)-1);
-                return true;
-            }
+    private static boolean isPrime(long n){
+        if(n<=1) return false;
+        for (long i =2 ;i<n;i++){
+            if(n%i==0)
+                return false;
         }
-        if(troco == 75){
-            if(change.get(25)>=1&&change.get(50)>=1){
-                change.put(25,change.get(25)-1);
-                change.put(50,change.get(50)-1);
-                return true;
-            }
-            else if(change.get(25)>=3){
-                change.put(25,change.get(25)-3);
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
-    public static String Tickets(int[] peopleInLine)
-    {
-        //Your code is here...
-        Map<Integer,Integer> change = new HashMap<>();
-        change.put(25,0);
-        change.put(50,0);
-        change.put(100,0);
-        for (int i : peopleInLine) {
-            System.out.println(i);
-            if(!makeChange(change,i))
-                return "NO";
+    public static long[] gap(int g, long m, long n) {
+        // your code
+        long num0=m;
+        long num1;
+        while (!isPrime(num0)){
+            num0++;
         }
-        return "YES";
+        for (long i = (num0+1);i<n;i++){
+            if(isPrime(i)){
+                if((i-num0)==g)
+                    return new long[]{num0,i};
+                num0 = i;
+            }
+        }
+        return null;
     }
     public static void main(String[] args) {
 
