@@ -11,22 +11,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Kata {
-    public static int[] beggars(int[] values, int n) {
-        // show me the code!
-        if(n==0||values.length==0){
-            return new int[n];
-        }
-        int [] ret = new int[n];
-        try {
-            for (int i = 0;i<values.length;i+=n){
-                for (int j =0;j<ret.length;j++){
-                    ret[j]+=values[i+j];
-                }
-            }
-        }catch (Exception e){
-            return ret;
-        }
-        return ret;
+    public static String meeting(String s) {
+        // your code
+        return
+        Arrays.stream(s.split(";"))
+                .map(ss->{
+                    String[] arr = Arrays.stream(ss.split(":")).toArray(String[]::new);
+                    return "("+arr[1].toUpperCase(Locale.ROOT)+", "+arr[0].toUpperCase(Locale.ROOT)+")";
+                }).sorted()
+                .collect(Collectors.joining());
     }
     public static void main(String[] args) {
 
