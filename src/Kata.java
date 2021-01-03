@@ -11,26 +11,45 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Kata {
-    public static String print(int n) {
-        // TODO your code here
-        if(n<0||n%2==0) return null;
-        String str = "";
-        for (int i = 1;i<n;i+=2){
-            str+=" ".repeat(n/2-i/2);
-            str+="*".repeat(i);
-            str+="\n";
+    public static boolean makeChange(Map<Integer,Integer> change,int price){
+        int troco= price - 25;
+        change.put(price,change.get(price)+1);
+        if(troco==0) return true;
+        if(troco == 25){
+            if (change.get(troco)>=1){
+                change.put(troco,change.get(troco)-1);
+                return true;
+            }
         }
-        str+="*".repeat(n)+"\n";
-        for (int i=n-2;i>=1;i-=2){
-            str+=" ".repeat(n/2-i/2);
-            str+="*".repeat(i);
-            str+="\n";
+        if(troco == 75){
+            if(change.get(25)>=1&&change.get(50)>=1){
+                change.put(25,change.get(25)-1);
+                change.put(50,change.get(50)-1);
+                return true;
+            }
+            else if(change.get(25)>=3){
+                change.put(25,change.get(25)-3);
+                return true;
+            }
         }
-        return str;
+        return false;
+    }
+    public static String Tickets(int[] peopleInLine)
+    {
+        //Your code is here...
+        Map<Integer,Integer> change = new HashMap<>();
+        change.put(25,0);
+        change.put(50,0);
+        change.put(100,0);
+        for (int i : peopleInLine) {
+            System.out.println(i);
+            if(!makeChange(change,i))
+                return "NO";
+        }
+        return "YES";
     }
     public static void main(String[] args) {
 
-        System.out.println(print(7));
     }
 
 
