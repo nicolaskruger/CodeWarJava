@@ -11,41 +11,48 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Kata {
-    private static String secondsTo(int seconds){
-        int hours = (int) seconds / 3600;
-        int remainder = (int) seconds - hours * 3600;
-        int mins = remainder / 60;
-        remainder = remainder - mins * 60;
-        int secs = remainder;
-        return ""+String.format("%02d",hours)+"|"+String.format("%02d",mins)+"|"+String.format("%02d",secs);
+    public static String encrypt(final String text, final int n) {
+        // Your code here
+        final int[] i = {0};
+        final int[] j = {0};
+        int m =n;
+        String txt = text;
+        while (m-->0){
+            txt =
+                Arrays.stream(txt.split(""))
+                        .filter(s-> i[0]++%2==1)
+                        .collect(Collectors.joining())
+                        +
+                        Arrays.stream(txt.split(""))
+                        .filter(s->j[0]++%2==0)
+                        .collect(Collectors.joining());
+            i[0]=0;
+            j[0]=0;
+        }
+        return txt;
     }
-    private static String range(Integer[] time){
-        return secondsTo(time[time.length-1]-time[0]);
+
+    public static String decrypt(final String encryptedText, final int n) {
+        // Your code here
+        if(n<=0)
+            return encryptedText;
+        String tx1 = encryptedText.substring(encryptedText.length()/2);
+        String tx2 = encryptedText.substring(0,encryptedText.length()/2);
+
+        String tx = "";
+        for (int i = 0;i<tx1.length();i++){
+            try {
+                tx+=tx1.charAt(i);
+                tx+=tx2.charAt(i);
+            }catch (Exception e){
+
+            }
+        }
+        return decrypt(tx,n-1);
     }
-    private static String average(Integer[] time){
-        return secondsTo(Arrays.stream(time).reduce(0,(acc,curr)->acc+curr)/time.length);
-    }
-    private static String median(Integer[] time){
-        return secondsTo(time.length%2==0?(time[time.length/2]+time[time.length/2-1])/2:
-                time[time.length/2]);
-    }
-    public static String stat(String strg) {
-        // your code
-        Integer[] vet =
-        Arrays.stream(strg.split("(, )|(\n)"))
-                .map(s->{
-                    String [] ss = s.split("\\|");
-                    return Integer.valueOf(ss[0])*3600+
-                            Integer.valueOf(ss[1])*60+
-                            Integer.valueOf(ss[2]);
-                }).sorted()
-                .toArray(Integer[]::new);
-        return "Range: "+range(vet)+" Average: "+average(vet)+" Median: "+median(vet);
-    }
+
     public static void main(String[] args) {
-        System.out.println(stat("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17\n" +
-                "02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|17|17, 2|22|00, 2|31|41\n" +
-                "02|15|59, 2|47|16, 02|17|20, 2|32|34, 2|32|34, 2|17|17"));
+        System.out.println(decrypt("hsi  etTi sats!", 1));
     }
 
 
